@@ -24,19 +24,44 @@ repositories {
 }
 
 dependencies {
-//	implementation 'org.springframework.boot:spring-boot-starter-security'
+	// Spring Boot Dependencies
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	implementation 'com.h2database:h2'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// H2 Database for Development
 	runtimeOnly 'com.h2database:h2'
+
+	// JWT Support for Authentication
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+	// SpringDoc OpenAPI for API Documentation
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0'
+	implementation 'jakarta.servlet:jakarta.servlet-api:6.1.0'
+
+
+	// OAuth2 and JOSE for Security Enhancements
+	implementation 'org.springframework.security:spring-security-oauth2-resource-server'
+	implementation 'org.springframework.security:spring-security-oauth2-jose'
+
+	// Lombok for Reducing Boilerplate Code
+	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// Development Only Dependencies
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	// Testing Dependencies
+	testImplementation 'org.springframework.boot:spring-boot-starter-test' // Includes JUnit 5 by default
 	testImplementation 'org.springframework.security:spring-security-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	testImplementation 'org.junit.jupiter:junit-jupiter-api' // JUnit 5 API
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine' // JUnit 5 Engine
+	testImplementation 'org.junit.platform:junit-platform-runner' // JUnit Platform Runner (optional)
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher' // JUnit Platform Launcher
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+	useJUnitPlatform() // Ensure JUnit 5 is used
 }
